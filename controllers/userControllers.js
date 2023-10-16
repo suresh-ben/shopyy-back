@@ -56,13 +56,15 @@ module.exports.loginUser = async (req, res) => {
         if (isPasswordCorrect) {
             let token = auth.createAccessToken(user);
 
-            res.cookie('authorization', token, {
-                domain: ".vercel.app",
-                sameSite: 'none',
-                secure: true,
-                path: "/"
-            });
-            res.send("Login successfull!!")
+            res
+                .cookie('authorization', token, {
+                    domain: ".vercel.app",
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: 'none',
+                    path: "/"
+                })
+                .send("Login successfull!!")
         } else {
             res.status(401).send('Password is incorrect')
         }
