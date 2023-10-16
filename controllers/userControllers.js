@@ -58,7 +58,7 @@ module.exports.loginUser = async (req, res) => {
 
             res
                 .cookie('authorization', token, {
-                    domain: ".vercel.app",
+                    domain: "*",
                     httpOnly: true,
                     secure: true,
                     sameSite: 'none',
