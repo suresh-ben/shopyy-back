@@ -12,7 +12,6 @@ const orderRoutes = require('./routes/orderRoutes');
 const mongoose = require('mongoose');
 
 const app = express();
-
 const port = process.env.PORT || 9001;
 
 // mongodb+srv://admin:admin123@cluster0.3rtvu1l.mongodb.net/Capstone2
@@ -22,22 +21,18 @@ mongoose.connect(process.env.MONGO_URL, {
 });
 
 let db = mongoose.connection;
-
 db.on('error', console.error.bind(console, "Connection Error"));
-
 db.once('open', () => console.log("Connected to MongoDB"));
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: process.env.FRONTEND,
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-    exposedHeaders: ['SET-COOKIE'],
     credentials: true,
 }));
 app.use(cookieParser({
     secure: true,
-    httpOnly: true
 }));
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', true);
