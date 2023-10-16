@@ -30,7 +30,7 @@ db.once('open', () => console.log("Connected to MongoDB"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: true,
+    origin: process.env.FRONTEND,
     credentials: true,
 }));
 app.use(cookieParser({
