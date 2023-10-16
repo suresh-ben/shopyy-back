@@ -32,9 +32,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: process.env.FRONTEND,
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    exposedHeaders: ['SET-COOKIE'],
     credentials: true,
 }));
-app.use(cookieParser({}));
+app.use(cookieParser({
+    secure: true,
+    httpOnly: true
+}));
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');

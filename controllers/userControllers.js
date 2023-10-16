@@ -57,8 +57,10 @@ module.exports.loginUser = async (req, res) => {
             let token = auth.createAccessToken(user);
 
             res.cookie('authorization', token, {
-                domain: "vercel.app",
+                domain: ".vercel.app",
+                httpOnly: true,
                 sameSite: 'none',
+                secure: true,
             });
             res.send("Login successfull!!")
         } else {
