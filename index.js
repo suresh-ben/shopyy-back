@@ -37,6 +37,11 @@ app.use(cookieParser({
     secure: true,
     httpOnly: true
 }));
+
+app.get('/', (req, res)=> {
+    res.send("Welcome to Shopyy backend");
+});
+
 app.use('/users', userRoutes);
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
