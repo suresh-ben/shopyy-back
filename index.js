@@ -26,13 +26,11 @@ db.once('open', () => console.log("Connected to MongoDB"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const corsOptions = {
+app.use(cors({
     origin: process.env.FRONTEND,
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     credentials: true,
-}
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+}));
 app.use(cookieParser({}));
 
 app.get('/', (req, res)=> {
