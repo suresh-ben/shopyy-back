@@ -57,11 +57,10 @@ module.exports.loginUser = async (req, res) => {
             let token = auth.createAccessToken(user);
 
             //for cookies
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-            res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-            res.setHeader('Access-Control-Allow-Headers', 'Set-Cookie');
+            res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND);
             res.setHeader('Access-Control-Allow-Credentials', true);
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+            res.setHeader('Access-Control-Allow-Headers', 'Content-Type, *');
             res
                 .cookie('authorization', token, {
                     httpOnly: true,
