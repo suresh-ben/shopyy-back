@@ -26,13 +26,11 @@ db.once('open', () => console.log("Connected to MongoDB"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const corsConfig = {
+app.use(cors({
     origin: process.env.FRONTEND,
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     credentials: true,
-}
-app.use(cors(corsConfig));
-
+}));
 app.use(cookieParser({}));
 
 app.get('/', (req, res)=> {
@@ -45,7 +43,7 @@ app.use('/orders', orderRoutes);
 app.use('/images', express.static('uploads'));
 
 
-app.listen(port, () => console.log(`Server is running on PORT: ${port}`))
+app.listen(port, () => console.log(`Server is running on localhost: ${port}`))
 
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Credentials', true);
