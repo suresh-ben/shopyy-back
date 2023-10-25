@@ -34,7 +34,7 @@ app.use(cors({
 app.use(cookieParser({}));
 
 app.get('/', (req, res)=> {
-    res.send("Welcome to Shopyy backend");
+    res.send("Welcome to Shopyy backend"); 
 });
 
 app.use('/users', userRoutes);
