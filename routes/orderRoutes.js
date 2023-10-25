@@ -20,6 +20,8 @@ router.get("/viewMyOrders", verify, orderControllers.viewMyOrders);
 
 router.get("/viewMyOrders/:id", verify, orderControllers.viewMyOrdersByInvoiceNo);
 
+router.put("/cancelOrder/:id", verify, orderControllers.cancelOrderById);
+
 /*previous versions
  1. router.post("/viewMyOrders/:id",  orderControllers.viewMyOrders);
  2. router.post("/viewMyOrders/:invoiceNo", verify, orderControllers.viewMyOrders);

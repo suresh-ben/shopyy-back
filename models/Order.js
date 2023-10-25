@@ -36,6 +36,12 @@ let orderSchema = new mongoose.Schema(
 			required: true
 		},
 
+		status: {
+			type: String,
+			enum: ['success', 'delivered', 'canceled'],
+			default: 'success'
+		}
+
 		// orderDetails: [
 		// 	{	
 		// 		shippingAddress: {

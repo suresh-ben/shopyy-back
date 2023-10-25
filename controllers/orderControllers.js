@@ -69,8 +69,28 @@ module.exports.viewMyOrdersByInvoiceNo = (req, res) => {
             }
             res.json(result);
         })
-        .catch((err) => res.status(500).json({ error: "Internal server error." }));
+        .catch((err) => res.status(400).json({ error: "No order found." }));
 };
+
+module.exports.cancelOrderById = (req, res) => {
+    const invoiceNo = req.params.id;
+
+    if (!invoiceNo) {
+        return res.status(400).json({ error: "InvoiceNo is required." });
+    }
+
+    Order.findOne({ invoiceNo })
+        .then(async (order) => {
+            if (!order) {
+                return res.status(404).json({ error: "Order not found." });
+            }
+            //if order
+            order.status = 'canceled';
+            await order.save();
+            res.send(order);
+        })
+        .catch((err) => res.status(400).json({ error: "No order found." }));
+}
 
 
 
