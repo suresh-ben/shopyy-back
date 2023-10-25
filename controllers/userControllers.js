@@ -56,9 +56,14 @@ module.exports.loginUser = async (req, res) => {
         if (isPasswordCorrect) {
             let token = auth.createAccessToken(user);
 
+            //for cookies
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+            res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+            res.setHeader('Access-Control-Allow-Headers', 'Set-Cookie');
+            res.setHeader('Access-Control-Allow-Credentials', true);
             res
                 .cookie('authorization', token, {
-                    domain: "*",
                     httpOnly: true,
                     secure: true,
                     sameSite: 'none',
